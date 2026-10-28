@@ -6,31 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>叶斌铖 · 自我介绍</title>
   <link rel="stylesheet" href="card.css">
-  <style>
+  <<style>
   body {
     font-family: 'Microsoft YaHei', sans-serif;
     background: #f0f4f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; margin: 0;
+    --accent: #39785b;
   }
+  /* 卡片整体入场动画 */
   .card {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    padding: 30px 40px;
-    max-width: 400px;
-    text-align: center;
+    background: #fff; border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    padding: 40px 45px; max-width: 420px; width: 100%; text-align: center;
+    animation: floatUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; /* 应用上浮动画 */
+    opacity: 0; /* 初始隐藏 */
   }
-  h2 { color: #39785b; margin: 10px 0; }
-  .eyebrow { color: #888; font-size: 14px; }
-  .intro { color: #555; line-height: 1.6; margin: 15px 0; }
-  .tags { list-style: none; padding: 0; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-  .tags li { background: #e8f5e9; color: #39785b; padding: 4px 12px; border-radius: 15px; font-size: 14px; }
-  .goal { color: #666; margin-top: 15px; }
-  .class-name { color: #39785b; font-weight: bold; }
+  @keyframes floatUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  /* 内容依次淡入 */
+  .eyebrow, h2, .class-name, .intro, .tags, .goal-box {
+    opacity: 0; animation: fadeIn 0.8s ease forwards;
+  }
+  .eyebrow { animation-delay: 0.3s; color: var(--accent); font-size: 13px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  h2 { animation-delay: 0.4s; color: #2c3e50; margin: 0 0 5px 0; font-size: 28px; }
+  .class-name { animation-delay: 0.5s; color: var(--accent); font-weight: bold; font-size: 15px; margin-bottom: 20px; display: inline-block; background: #e8f5e9; padding: 2px 12px; border-radius: 10px; }
+  .intro { animation-delay: 0.6s; color: #555; line-height: 1.8; margin: 0 0 25px 0; font-size: 15px; }
+  .tags { animation-delay: 0.7s; list-style: none; padding: 0; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
+  .tags li { background: #f4f9f5; color: var(--accent); padding: 6px 16px; border-radius: 20px; font-size: 14px; font-weight: 500; border: 1px solid #dcedc8; transition: all 0.3s ease; cursor: default; }
+  .tags li:hover { background: var(--accent); color: #fff; border-color: var(--accent); transform: scale(1.1); } /* 悬停放大 */
+  .goal-box { animation-delay: 0.8s; background: #f9fbf9; border-left: 4px solid var(--accent); padding: 15px 20px; border-radius: 0 8px 8px 0; text-align: left; color: #444; font-size: 14px; line-height: 1.6; }
+  .goal-box strong { color: var(--accent); display: block; margin-bottom: 4px; font-size: 13px; letter-spacing: 1px; }
+  @keyframes fadeIn { to { opacity: 1; } }
 </style>
 </head>
 <body style="--accent: #39785b">
