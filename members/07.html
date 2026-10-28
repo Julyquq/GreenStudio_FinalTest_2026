@@ -1,154 +1,245 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>叶斌铖 · 自我介绍</title>
-  <link rel="stylesheet" href="card.css">
-  <style>
-  body {
-    font-family: 'Microsoft YaHei', sans-serif;
-    background: #f0f4f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    --accent: #39785b;
-    padding: 20px; 
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>叶斌铖 - 个人名片</title>
+    <style>
+        /* --- 全局重置与背景 --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-  /* 竖版卡片容器 */
-  .card {
-    background: #fff;
-    border-radius: 20px; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    padding: 50px 35px; 
-    max-width: 320px; 
-    width: 100%;
-    text-align: center;
-    animation: floatUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-    opacity: 0;
-  }
+        body {
+            background-color: #f5f7fa; /* 网页背景深一点，突出卡片 */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
 
-  /* 卡片整体入场动画 */
-  @keyframes floatUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+        /* --- 卡片主体容器 --- */
+        .card-container {
+            background: #ffffff;
+            width: 375px; /* 模拟手机屏幕宽度 */
+            min-height: 667px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
 
-  /* 内容依次淡入 */
-  .eyebrow, h2, .class-name, .intro, .tags, .goal-box {
-    opacity: 0;
-    animation: fadeIn 0.8s ease forwards;
-  }
+        /* --- 顶部导航栏 (模拟) --- */
+        .top-nav {
+            padding: 20px 24px;
+            font-size: 12px;
+            color: #999;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            opacity: 0;
+            animation: slideDown 0.8s ease forwards;
+        }
 
-  .eyebrow {
-    animation-delay: 0.3s;
-    color: var(--accent);
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-  }
+        /* --- 主要内容区域 --- */
+        .content-area {
+            padding: 40px 30px;
+            flex: 1;
+            position: relative;
+        }
 
-  h2 {
-    animation-delay: 0.4s;
-    color: #2c3e50;
-    margin: 0 0 8px 0;
-    font-size: 32px; 
-  }
+        /* 装饰背景圆 (右上角) */
+        .bg-circle {
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 180px;
+            height: 180px;
+            background: #eef5f9;
+            border-radius: 50%;
+            z-index: 0;
+        }
 
-  .class-name {
-    animation-delay: 0.5s;
-    color: var(--accent);
-    font-weight: bold;
-    font-size: 14px;
-    margin-bottom: 30px; 
-    display: inline-block;
-    background: #e8f5e9;
-    padding: 4px 16px;
-    border-radius: 20px;
-  }
+        /* --- 头部信息 (ABOUT ME / 名字) --- */
+        .header-section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
 
-  .intro {
-    animation-delay: 0.6s;
-    color: #555;
-    line-height: 2; 
-    margin: 0 0 35px 0;
-    font-size: 15px;
-    padding: 0 10px; 
-  }
+        .sub-title {
+            font-size: 12px;
+            color: #2c5e48; /* 墨绿色 */
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
 
-  /* 标签竖排布局 */
-  .tags {
-    animation-delay: 0.7s;
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column; 
-    gap: 12px;
-    margin-bottom: 35px;
-  }
+        .name {
+            font-size: 32px;
+            font-weight: 800;
+            color: #222;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
 
-  .tags li {
-    background: #f4f9f5;
-    color: var(--accent);
-    padding: 10px 20px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    border: 1px solid #dcedc8;
-    transition: all 0.3s ease;
-    cursor: default;
-  }
+        .class-info {
+            font-size: 14px;
+            color: #666;
+        }
 
-  .tags li:hover {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-    transform: scale(1.05);
-  }
+        /* --- 引用框 (核心视觉点) --- */
+        .quote-box {
+            background-color: #f4f9f4; /* 浅淡的绿色背景 */
+            border-left: 4px solid #dcb376; /* 左侧金棕色线条 */
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInRight 0.8s ease 0.4s forwards;
+        }
 
-  /* 目标框 */
-  .goal-box {
-    animation-delay: 0.8s;
-    background: #f9fbf9;
-    border-left: 4px solid var(--accent);
-    padding: 20px;
-    border-radius: 0 12px 12px 0;
-    text-align: left;
-    color: #444;
-    font-size: 13px;
-    line-height: 1.8;
-  }
+        .quote-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+            font-weight: 500;
+        }
 
-  .goal-box strong {
-    color: var(--accent);
-    display: block;
-    margin-bottom: 6px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
+        /* --- 标签区域 --- */
+        .tags-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
 
-  /* 基础淡入动画 */
-  @keyframes fadeIn { 
-    to { opacity: 1; } 
-  }
-</style>
+        .tag {
+            background: #f5f5f5;
+            color: #555;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 13px;
+            border: 1px solid #eee;
+        }
+
+        /* --- 底部目标 (我想学会) --- */
+        .goal-section {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+        }
+
+        .goal-highlight {
+            color: #2c5e48; /* 墨绿色高亮 */
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        /* --- 底部链接栏 --- */
+        .bottom-bar {
+            padding: 15px 24px;
+            border-top: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #999;
+            background: #fff;
+            opacity: 0;
+            animation: slideUp 0.8s ease 1s forwards;
+        }
+
+        .preview-link {
+            text-decoration: none;
+            color: #999;
+            display: flex;
+            align-items: center;
+        }
+        
+        .preview-link span { margin-left: 4px; }
+
+        /* --- 动画关键帧定义 --- */
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInRight {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+    </style>
 </head>
-<body style="--accent: #39785b">
-  <p class="eyebrow">ABOUT ME / 07</p>
-  <h2>叶斌铖</h2>
-  <p class="class-name">智能2602</p>
-  <!-- TODO：完成下面的介绍、三个技能或兴趣标签，以及学习目标。 -->
-  <p class="intro">我是孜孜不倦的学习者，在知识的旅途中不断蜕变。</p>
-  <ul class="tags" aria-label="我的技能和兴趣">
-    <li>python</li><li>机器学习</li><li>深度探索</li>
-  </ul>
-  <p class="goal"><strong>我想学会</strong>在绿荫的指导下，逐步学习Python编程和机器学习算法。</p>
+<body>
+
+    <div class="card-container">
+        <!-- 顶部导航 -->
+        <div class="top-nav">
+            <span>07</span>
+            <span>智能2602 / 独立开发区域</span>
+        </div>
+
+        <div class="content-area">
+            <!-- 装饰背景 -->
+            <div class="bg-circle"></div>
+
+            <!-- 头部信息 -->
+            <div class="header-section">
+                <div class="sub-title">ABOUT ME / 07</div>
+                <h1 class="name">叶斌铖</h1>
+                <div class="class-info">智能2602</div>
+            </div>
+
+            <!-- 自我介绍引用框 -->
+            <div class="quote-box">
+                <p class="quote-text">我是叶斌铖。不骄的学习者，在知识的旅途中不断蜕变。</p >
+            </div>
+
+            <!-- 标签 -->
+            <div class="tags-section">
+                <span class="tag">Python</span>
+                <span class="tag">前端开发</span>
+                <span class="tag">数据分析</span>
+            </div>
+
+            <!-- 目标/我想学会 -->
+            <div class="goal-section">
+                <span class="goal-highlight">我想学会</span> 
+                用代码构建世界，让逻辑成为艺术。
+            </div>
+        </div>
+
+        <!-- 底部栏 -->
+        <div class="bottom-bar">
+            <span>members/07.html</span>
+            <a href=" " class="preview-link">独立预览 <span>↗</span></a >
+        </div>
+    </div>
+
 </body>
 </html>
