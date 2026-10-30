@@ -1,5 +1,7 @@
+# 第一部分 · 排序编程
+# 实现升序排序，无需读取输入或编写 main
+
 def sort_array(arr):
-    # 冒泡排序，每次交换后 snapshot
     n = len(arr)
     for i in range(n - 1):
         for j in range(n - 1 - i):
